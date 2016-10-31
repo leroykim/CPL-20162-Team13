@@ -1,0 +1,367 @@
+package Anderson.FH;
+
+/**
+ * Hello world!
+ *
+ */
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.OutputStream;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.Scanner;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.api.IDatatype;
+import ca.uhn.fhir.model.base.resource.ResourceMetadataMap;
+//import ca.uhn.fhir.model.dstu.resource.Microarray.Subject;
+//import ca.uhn.fhir.model.dstu.valueset.ContactUseEnum;
+import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
+import ca.uhn.fhir.model.dstu2.composite.CodingDt;
+import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
+import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
+import ca.uhn.fhir.model.dstu2.composite.MetaDt;
+import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
+import ca.uhn.fhir.model.dstu2.resource.Observation;
+import ca.uhn.fhir.model.dstu2.resource.Observation.Component;
+import ca.uhn.fhir.model.dstu2.resource.OperationOutcome.Issue;
+import ca.uhn.fhir.model.dstu2.resource.Patient;
+import ca.uhn.fhir.model.dstu2.resource.ValueSet;
+import ca.uhn.fhir.model.dstu2.valueset.AddressTypeEnum;
+import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ContactPointSystemEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
+import ca.uhn.fhir.model.dstu2.valueset.NameUseEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
+import ca.uhn.fhir.model.primitive.BoundCodeDt;
+import ca.uhn.fhir.model.primitive.DateDt;
+import ca.uhn.fhir.model.primitive.DateTimeDt;
+import ca.uhn.fhir.model.primitive.DecimalDt;
+import ca.uhn.fhir.model.primitive.TimeDt;
+import ca.uhn.fhir.parser.IParser;
+
+
+public class Serial
+{
+    public Serial()
+    {
+        super();
+    }
+    
+    void connect ( String portName ) throws Exception
+    {
+        CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
+        if ( portIdentifier.isCurrentlyOwned() )
+        {
+            System.out.println("Error: Port is currently in use");
+        }
+        else
+        {
+            
+            CommPort commPort = portIdentifier.open(this.getClass().getName(),2000);
+            
+            if ( commPort instanceof SerialPort )
+            {
+               
+                SerialPort serialPort = (SerialPort) commPort;
+                serialPort.setSerialPortParams(115200,SerialPort.DATABITS_8,SerialPort.STOPBITS_1,SerialPort.PARITY_NONE);
+                
+                InputStream in = serialPort.getInputStream();
+                OutputStream out = serialPort.getOutputStream();
+                
+                //읽기, 쓰기 쓰레드 작동
+                (new Thread(new SerialRW(in, out))).start();
+            }
+            else
+            {
+                System.out.println("Error: Only serial ports are handled by this example.");
+            }
+        }     
+    }
+    
+    public static class FHIRframe
+    {
+    	 int sensorValue;
+         
+    	 void setValue(int v)
+    	 {
+    		 sensorValue = v;
+    	 }
+    	 
+    	 String setUp(String Id, String idenValue, String code, String display, String componentCode, String componentDisplay, String unit)
+    	 { 
+    		FhirContext ctx = FhirContext.forDstu2(); 
+    		Observation observer = new Observation();
+	    	observer.setId(Id);
+	          
+	        /*Date now = new Date();
+	        MetaDt meta = new MetaDt();
+	        meta.setLastUpdated(now);*/
+	         
+	        observer.addIdentifier().setValue(idenValue);
+	      	//observer.setStatus(ObservationStatusEnum.FINAL);
+	      	
+	      	DateTimeDt time = new DateTimeDt();
+	      	Date dt = new Date();
+	      	time.setValue(dt);
+	      	observer.setEffective(time);
+	          
+	      	//CodingDt coding = observer.getCode().addCoding();
+	      	//coding.setCode(/*"55284-4"*/code).setSystem("http://loinc.org").setDisplay(/*"Blood pressure systolic & diastolic"*/display);
+	      	
+	      	CodeableConceptDt concept = new CodeableConceptDt();
+	      	concept.addCoding().setSystem("http://snomed.info/sct").setCode("368209003").setDisplay("Right arm");
+	      	observer.setBodySite(concept);
+	      	
+	      	CodingDt coding2 = new CodingDt();
+	      	coding2.setSystem("http://loinc.org").setCode(/*"8480-6"*/componentCode).setDisplay(/*"Syttolic blood pressure"*/componentDisplay);
+	      	
+	      	CodeableConceptDt concept2 = new CodeableConceptDt();
+	      	concept2.addCoding(coding2);
+	      	
+	      	
+	      	QuantityDt value = new QuantityDt();
+	      	value.setValue(sensorValue).setUnit(/*"mm[Hg]"*/unit);
+	      	
+	      	Component compo = new Component();
+	      	compo.setCode(concept2).setValue(value);
+	      	observer.addComponent().setCode(concept2).setValue(value);
+	      	
+	      	String encoded = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(observer);
+			
+	      	return encoded;
+    	 }
+    }
+    
+    public static class sendToserver
+    {
+    	URL url;
+    	HttpURLConnection conn;
+    	
+    	void urlSet(String sensorName) throws IOException
+    	{
+    		url =  new URL("https://learning-machine-fhir.herokuapp.com/repository/save/" + sensorName);
+    		conn = (HttpURLConnection) url.openConnection();
+       	
+    		conn.setDoInput(true);
+    		conn.setDoOutput(true);
+    		conn.setUseCaches(false);
+    		conn.setRequestProperty("Content-Type", "application/fhir+json");
+    		conn.setRequestProperty("Accept", "*/*");
+    		conn.setRequestProperty("X-Requested-with", "XMLHttpRequest");
+    		conn.setRequestMethod("POST");
+    	}
+    	
+    	void wri(String encoded) throws IOException
+    	{
+           	OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(encoded);
+           	wr.flush();
+          	
+           	StringBuilder sb = new StringBuilder();
+           	int HttpResult =conn.getResponseCode();
+            if(HttpResult ==HttpURLConnection.HTTP_OK)
+            {
+          
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));  
+          
+                String line = null;  
+          
+                while ((line = br.readLine()) != null)
+                {  
+                 sb.append(line + "\n");  
+                }  
+          
+                br.close();
+          
+                System.out.println(""+sb.toString());  
+            }
+    	}
+    }
+    
+    public static class SerialRW implements Runnable 
+    {
+        InputStream in;
+        OutputStream out;
+        sendToserver sd = new sendToserver();
+        FHIRframe ff = new FHIRframe();
+        
+        public SerialRW ( InputStream in, OutputStream out )
+        {
+            this.in = in;
+            this.out = out;
+        }
+        
+        public void run ()
+        {
+            byte[] buffer = new byte[1024];  
+            byte[] buffer_int = new byte[1024];
+            int len = -1;
+           
+            try
+            {
+            	this.out.write('W');
+            	while((len = this.in.read(buffer)) > -1)
+            	{
+            		System.out.println(new String(buffer).trim());
+            	}
+            	//System.out.println(str);
+            	String flag = new String(buffer);
+         
+            	while (true)
+                {
+                	if(flag.trim().equals("1"))
+                	{
+                		System.out.println(flag);
+                		sd.urlSet("bpm");
+                		
+                		this.out.write('W');
+                		len = this.in.read(buffer_int);
+                		System.out.println(new String(buffer_int));
+                
+                		ff.setValue(Integer.parseInt(new String(buffer_int).trim()));
+                		sd.wri(ff.setUp("blood pressure", "960924-2895112", "55284-4", "Blood pressure systolic & diastolic", "8480-6", "Syttolic blood pressure", "mm[Hg]"));
+                	}
+                	else if(flag.trim().equals("2"))
+                	{
+                		System.out.println(flag);
+                		sd.urlSet("spo2");
+                		
+                		this.out.write('W');
+                		len = this.in.read(buffer_int);
+                		System.out.println(new String(buffer_int));
+                		
+                		ff.setValue(Integer.parseInt(new String(buffer_int).trim()));
+                		sd.wri(ff.setUp("SPO2", "960924-2895112", "44284-4", "SPO2 on the neck", "7480-6", "Rightarm SPO2", "%"));
+                	}
+                	
+                	this.out.write('W');
+                	this.in.read(buffer, 0, 1);
+                	flag = new String(buffer);
+            	}
+            }
+            catch ( IOException e )
+            {
+                e.printStackTrace();
+            }            
+        }
+    }
+    
+    public static void main ( String[] args ) throws IOException
+    {
+    	URL url =  new URL("https://learning-machine-fhir.herokuapp.com/repository/save/patients");
+    	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    	
+		conn.setDoInput(true);
+		conn.setDoOutput(true);
+		conn.setUseCaches(false);
+		conn.setRequestProperty("Content-Type", "application/fhir+json");
+		conn.setRequestProperty("Accept", "*/*");
+		conn.setRequestProperty("X-Requested-with", "XMLHttpRequest");
+		conn.setRequestMethod("POST");
+		
+    	FhirContext ctx = FhirContext.forDstu2();    
+      	Patient patient = new Patient();
+      	patient.addIdentifier().setValue("960924-2895112");
+        patient.addName().setUse(NameUseEnum.OFFICIAL).addFamily("Anderson").addGiven("rollingstone").addGiven("K");
+        patient.addTelecom().setSystem(ContactPointSystemEnum.PHONE).setUse(ContactPointUseEnum.WORK).setValue("01085569117");
+      	patient.setGender(AdministrativeGenderEnum.MALE);
+      	
+      	/*AddressDt add = new AddressDt();
+      	add.setCity("Daegue").setCountry("Repulic of Korea").setDistrict("Donggu").setPostalCode("450224");
+      	patient.addAddress(add);*/
+      	
+      	DateDt date = new DateDt();
+        date.setValueAsString("1992-05-23");
+      	patient.setBirthDate(date);
+      	
+        /*Observation observer = new Observation();
+        observer.setId("blood-pressure");
+        
+        /*Date now = new Date();
+        MetaDt meta = new MetaDt();
+        meta.setLastUpdated(now);*//*
+       
+        observer.addIdentifier().setValue("960924-2895112");
+    	observer.setStatus(ObservationStatusEnum.FINAL);
+    	
+    	DateTimeDt time = new DateTimeDt();
+    	Date dt = new Date();
+    	time.setValue(dt);
+    	observer.setEffective(time);
+        
+    	CodingDt coding = observer.getCode().addCoding();
+    	coding.setCode("55284-4").setSystem("http://loinc.org").setDisplay("Blood pressure systolic & diastolic");
+    	
+    	CodeableConceptDt concept = new CodeableConceptDt();
+    	concept.addCoding().setSystem("http://snomed.info/sct").setCode("368209003").setDisplay("Right arm");
+    	observer.setBodySite(concept);
+    	
+    	CodingDt coding2 = new CodingDt();
+    	coding2.setSystem("http://loinc.org").setCode("8480-6").setDisplay("Syttolic blood pressure");
+    	
+    	CodeableConceptDt concept2 = new CodeableConceptDt();
+    	concept2.addCoding(coding2);
+    	
+    	
+    	QuantityDt value = new QuantityDt();
+    	value.setValue(9).setUnit("mm[Hg]");
+    	
+    	Component compo = new Component();
+    	compo.setCode(concept2).setValue(value);
+    	observer.addComponent().setCode(concept2).setValue(value);*/
+    	
+      	String encoded = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
+       	OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(encoded);
+       	wr.flush();
+      	
+       	StringBuilder sb = new StringBuilder();
+       	int HttpResult =conn.getResponseCode();
+        if(HttpResult ==HttpURLConnection.HTTP_OK)
+        {
+      
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));  
+      
+            String line = null;  
+      
+            while ((line = br.readLine()) != null)
+            {  
+             sb.append(line + "\n");  
+            }  
+      
+            br.close();
+      
+            System.out.println(""+sb.toString());  
+        }
+        
+   	   try
+        {
+            (new Serial()).connect("COM5");
+        }
+	    catch ( Exception e )
+	    {
+	         e.printStackTrace();
+	    }
+    }
+}

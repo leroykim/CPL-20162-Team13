@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.apache.http.HttpResponse"/>
+<fullyQualifiedTypeName name="org.apache.http.HttpEntity"/>
+<fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilderFactory"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="ca.uhn.fhir.model.dstu.valueset.ContactUseEnum"/>
+<fullyQualifiedTypeName name="ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum"/>
+<fullyQualifiedTypeName name="ca.uhn.fhir.model.primitive.BoundCodeDt"/>
+<fullyQualifiedTypeName name="ca.uhn.fhir.model.primitive.DateDt"/>
+<fullyQualifiedTypeName name="ca.uhn.fhir.model.dstu2.composite.AddressDt"/>
+<fullyQualifiedTypeName name="ca.uhn.fhir.model.dstu2.valueset.AddressTypeEnum"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="java.util.Calendar.Builder"/>
+<fullyQualifiedTypeName name="ca.uhn.fhir.model.base.resource.ResourceMetadataMap"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt"/>
+<fullyQualifiedTypeName name="java.nio.ByteOrder"/>
+<fullyQualifiedTypeName name="ca.uhn.fhir.model.dstu2.composite.ElementDefinitionDt.Type"/>
+</qualifiedTypeNameHistroy>
