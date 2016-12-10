@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/poku/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.1.0/aa557d71ead91cbf26e0c316a0f593d168303309/converter-gson-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/converter-gson-2.1.0_805d875364e1cfbc76f25d36dd7a3a3a629d6fd6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.5/6c6c702c89bfff3cd9e80b04d668c5e190d588c6/commons-lang3-3.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="6c6c702c89bfff3cd9e80b04d668c5e190d588c6">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/commons-lang3-3.5_bc63aa11c4c425c92fbae8b2c0465a5262f51412.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/.gradle/caches/modules-2/files-2.1/javax.annotation/javax.annotation-api/1.2/479c1e06db31c432330183f5cae684163f186146/javax.annotation-api-1.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="479c1e06db31c432330183f5cae684163f186146">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/javax.annotation-api-1.2_f49f01b49c089901f91d98355ec616293bc4c329.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/Desktop/blue/Application/build/intermediates/exploded-aar/com.android.support/support-v4/24.1.1/jars/libs/internal_impl-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/internal_impl-24.1.1_20df1fafd40bf62a4a78531c34c4be4542adbc5d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/Desktop/blue/Application/build/intermediates/exploded-aar/com.android.support/support-v4/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/com.android.support-support-v4-24.1.1_5e8e2a8f901c18f0621ebbaa89ee34fb129e88a4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.0/2b802460eea20f8f2ad9c08c74e0f14718e88aa9/okhttp-3.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="2b802460eea20f8f2ad9c08c74e0f14718e88aa9">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/okhttp-3.3.0_d897eb45fd9f3ee030f589c0613e85a8784e5942.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/c4ba5371a29ac9b2ad6129b1d39ea38750043eff/gson-2.8.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/gson-2.8.0_bf0e7789413bfb5e319f2db3ae260ef6daa5a1fd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/Desktop/blue/Application/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="c936c1bd42f0c018c18920c7bec619ef056b24f8">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.1.1_a7bf6675cd45f2f390f7240384c2b1151378d2ad.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.1.0/2de7cd8b95b7021b1d597f049bcb422055119f2c/retrofit-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/retrofit-2.1.0_c8092eb12afe475d13a7dd68912bb90923fd6809.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.8.0/5ea7af56cc7c567ed9856d99efb30740e9b17ff/okio-1.8.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/okio-1.8.0_1b0b27877112021f8c4b6da003b2e47620454a64.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/Desktop/blue/Application/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="f62e763609f65e47dc6c498760a4accf02776788">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.1.1_675a22a359a3be98c50af2684bb2124aba3c449b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/Desktop/blue/Application/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="1256c10604bb098490eab070d76754ac5ceab35c">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-24.1.1_7540b6f4b3d489a0ba320456cbbc897fc201e7e4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/Desktop/blue/Application/build/intermediates/exploded-aar/com.android.support/cardview-v7/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="4add8aa95c9f4e9a2ad64b7e2bf08e97e28955c1">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/com.android.support-cardview-v7-24.1.1_e8057b268e3b24499468031f9992ac92ceb60d52.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.1.1/support-annotations-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/support-annotations-24.1.1_b756df6a54598bca80ef6cea7e2c49d8f991809d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/poku/Desktop/blue/Application/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="8a5380ddd58f4f8946ddade4c64dd77de4a836d5">
+        <dex dex="/Users/poku/Desktop/blue/Application/build/intermediates/pre-dexed/debug/com.android.support-gridlayout-v7-24.1.1_c8d13c2a47eb15c8e2d2bbf7d65934a03e3a5715.jar" />
+    </item>
+
+</items>

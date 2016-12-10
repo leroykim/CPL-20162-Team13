@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\Pc\\Desktop\\blue\\blue\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_action_device_access_bluetooth_searching.png",
+        "source": "C:\\Users\\Pc\\Desktop\\blue\\blue\\Application\\src\\main\\res\\drawable-hdpi\\ic_action_device_access_bluetooth_searching.png"
+    },
+    {
+        "merged": "C:\\Users\\Pc\\Desktop\\blue\\blue\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\tile.9.png",
+        "source": "C:\\Users\\Pc\\Desktop\\blue\\blue\\Application\\src\\main\\res\\drawable-hdpi\\tile.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Pc\\Desktop\\blue\\blue\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Pc\\Desktop\\blue\\blue\\Application\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    }
+]
